@@ -1,0 +1,14 @@
+Rocketseat Bootcamp GoStack - Nível 3
+
+------> 11. Iniciando aplicativo mobile
+Nesse módulo criaremos a versão mobile do GoBarber que será utilizada pelos usuários
+para agendar serviços dentro da plataforma
+
+----> 1. Estrutura e padrões
+--> Configurando estrutura
+A equipe da Rocketseat não recomenda ter o React Native CLi instalado como globalmente
+	yarn global remove react-native-cli
+
+Para criar um novo projeto usaremos o comando abaixo, o nome da pasta não pode conter
+acentos e símbolos, ele também ira realizar diversas configurações essenciais
+	yarn react-native init appgobarber --template react-native-template-typescript
