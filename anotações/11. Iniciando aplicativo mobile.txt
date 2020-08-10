@@ -116,3 +116,16 @@ E por último criamos o arquivo abaixo para adicionar as seguintes configuraçõ
     arrowParens: 'avoid',
     printWidth: 91,
   }
+
+--> Configurando StatusBar
+Para executar o servidor devemos execar os seguintes comando na seguencia
+	yarn start
+		yarn react-native start
+	yarn android
+		yarn react-native run-android
+
+Nesta aula aprendemos também como basicos da dependência abaixo
+	StatusBar
+
+	Cor branca dos icones do topo: barStyle="light-content"
+	Cor de fundo do topo: backgroundColor="#312e38"
