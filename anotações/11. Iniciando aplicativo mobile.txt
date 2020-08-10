@@ -12,3 +12,9 @@ A equipe da Rocketseat não recomenda ter o React Native CLi instalado como glob
 Para criar um novo projeto usaremos o comando abaixo, o nome da pasta não pode conter
 acentos e símbolos, ele também ira realizar diversas configurações essenciais
 	yarn react-native init appgobarber --template react-native-template-typescript
+
+Para verificar se o celular está conectado temos o comando abaixo
+	adb devices
+
+E para executar o programa temos este comando
+	yarn start
