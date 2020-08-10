@@ -18,3 +18,101 @@ Para verificar se o celular está conectado temos o comando abaixo
 
 E para executar o programa temos este comando
 	yarn start
+
+--> Padrões de Projeto com Eslint, Prettier e Editor Config
+Primeiro instalamos a extensão do EditorConfig e depois criamos o arquivo de
+configuração do EditorConfig clicando o botão direito
+  root = true
+
+  [*]
+  indent_style = tab
+  indent_size = 2
+  charset = utf-8
+  trim_trailing_whitespace = true
+  insert_final_newline = true
+  end_of_line = crlf
+
+Agora iniciamos as configurações para o Eslint funcionar com o React Native Cli
+	yarn add eslint@6.8.0 -D
+
+Depois de instalar o Eslint usamos o comando abaixo para saber de quais dependências
+iremos precisar para finalizar as configurações
+	yarn eslint --init
+
+	? How would you like to use ESLint? To check syntax, find problems, and enforce code style
+	? What type of modules does your project use? JavaScript modules (import/export)
+	? Which framework does your project use? React
+	? Does your project use TypeScript? Yes
+	? Where does your code run?
+	? How would you like to define a style for your project? Use a popular style guide
+	? Which style guide do you want to follow? Airbnb: https://github.com/airbnb/javascript
+	? What format do you want your config file to be in? JSON
+
+	yarn add eslint-plugin-react@^7.20.0 @typescript-eslint/eslint-plugin@latest eslint-config-airbnb@latest eslint-plugin-import@^2.21.2 eslint-plugin-jsx-a11y@^6.3.0 eslint-plugin-react-hooks@^2.3.0 @typescript-eslint/parser@latest -D
+
+Agora criamos o arquivo abaixo para criar exceções de verificações
+	.eslintignore
+
+	node_modules
+	build
+	dist
+
+Agora adicionamos as configurações abaixo no arquivo .eslint.json
+	{
+		"extends": [
+			"plugin:@typescript-eslint/recommended"
+		],
+		"globals": {
+			"__DEV__": "readonly"
+		},
+		"plugins": [
+			"react-hooks"
+		],
+		"rules": {
+			"react-hooks/rules-of-hooks": "error",
+			"react-hooks/exhaustive-deps": "warn",
+			"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+			"import/prefer-default-export": "off",
+			"import/extensions": [
+				"error",
+				"ignorePackages",
+				{
+					"ts": "never",
+					"tsx": "never"
+				}
+			]
+		},
+		"settings": {
+			"import/resolver": {
+				"typescript": {}
+			}
+		}
+	}
+
+Faz o React ler e entender os arquivos TypeScript
+  yarn add eslint-import-resolver-typescript -D
+
+Temos que instalar as seguintes dependências para utilizar o Prettier
+  yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+
+Agora devemos adicionar as seguintes configurações no arquivo .eslintrc.json
+  "extends": [
+  	"prettier/@typescript-eslint",
+		"plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  },
+
+E por último criamos o arquivo abaixo para adicionar as seguintes configurações
+	prettier.config.js
+
+  module.exports = {
+    singleQuote: true,
+    trailingComma: 'all',
+    arrowParens: 'avoid',
+    printWidth: 91,
+  }
