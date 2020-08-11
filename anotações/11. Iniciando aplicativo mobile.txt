@@ -129,3 +129,37 @@ Nesta aula aprendemos também como basicos da dependência abaixo
 
 	Cor branca dos icones do topo: barStyle="light-content"
 	Cor de fundo do topo: backgroundColor="#312e38"
+
+--> Configurando navegação
+A dependência de estilação abaixo também serve para a verção mobile, mais temos que
+ativar o modo React Native na importação do mesmo
+	yarn add styled-components
+	yarn add @types/styled-components -D
+
+	import Styled from 'styled-components/native'
+
+Para lidar com as rotas iremos usar a dependência React Navigation
+	yarn add @react-navigation/native
+
+Depois de instalar a dependência temos que realizar alguma configurações onde temos
+salvo doque fazer no site abaixo
+	https://reactnavigation.org/docs/getting-started/
+
+A primeira configuração e instalar também estas dependências pois não usamos Expo
+	yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+A segunda para os sitema IOS é dentro da pasta ios executar este comando depois de ter
+instalado na maquina o Cocoapods (Gerenciado de diretórios como o Yarn)
+	pod install
+
+E para o Android não vamos precisar instalar na de expecial
+Para as ambas plataforma devemos realizar a importação a baixo na primeira linha
+do primeiro arquivo que ira executar pela API
+	import 'react-native-gesture-handler';
+
+Também devemos instalar esta dependência abaixo para lidar com as navegações
+	yarn add @react-navigation/stack
+
+Devemos também manter a dependência por volta de todo nosso programa, caso contrário a
+navegação não vai funcionar mais ele traz uma estilização pronta e editavel
+	import { NavigationContainer } from '@react-navigation/native';
