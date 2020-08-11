@@ -163,3 +163,19 @@ Também devemos instalar esta dependência abaixo para lidar com as navegações
 Devemos também manter a dependência por volta de todo nosso programa, caso contrário a
 navegação não vai funcionar mais ele traz uma estilização pronta e editavel
 	import { NavigationContainer } from '@react-navigation/native';
+
+--> Densidade de pixel
+O conceito de densidade de pixel diz que a quantidade de pixel varia de dispositovo
+para dispositivo, com isso quando vamos utilizar imagens devemos ter a mesma imagem
+com três tamanhos diferente
+	Tamanho normal
+	Dobro do tamanho normal
+	Triplo do tamanho normal
+
+Para usar uma imagem com o conceito acima estamos esta dependência, mais os três
+arquivos deve manter este padrão de nome
+	import { Image } from 'react-native';
+
+	logo.png
+	logo@2x.png
+	logo@3x.png
