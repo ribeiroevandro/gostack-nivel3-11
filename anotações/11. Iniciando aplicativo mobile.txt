@@ -179,3 +179,13 @@ arquivos deve manter este padrão de nome
 	logo.png
 	logo@2x.png
 	logo@3x.png
+
+--> Importando fontes externas
+Para as verções mobile devemos baixar as fontes e inserir dentro da API pois a
+importação que realizamos em vezes anteriores não vai funcionar
+
+Depois temos que criar o arquivo abaixo e configurar ele falando que as fontas pertencem
+aos arquivos base do nosso programa
+	react-native.config.js
+
+O lado rui é que o React Native não permite estilização com herança
