@@ -189,3 +189,25 @@ aos arquivos base do nosso programa
 	react-native.config.js
 
 O lado rui é que o React Native não permite estilização com herança
+
+----> 2. Autenticação e cadastro
+--> Input & Button
+Para utilizar botões vamos usar a dependência abaixo
+	yarn add react-native-vector-icons
+	yarn add @types/react-native-vector-icons -D
+
+No React Native temos que definir que os icones fazem parte dos arquivos principais do
+sistema adicinando os seguintes comandos nos seguintes arquivos
+
+	ios/appgobarber/Info.plist
+		<string>Feather.ttf</string>
+
+	android/app/src/build.gradle
+		// DEFINE QUAIS ICONES IMPORTAR
+		project.ext.vectoricons = [
+			iconFontNames: ['Feather.ttf']
+		];
+
+		apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+Também revisamos metodos visto em vezes anteriores

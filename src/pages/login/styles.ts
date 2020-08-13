@@ -4,6 +4,7 @@ export const Container = Styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+	padding: 0 30px;
 `;
 
 export const Titulo = Styled.Text`
