@@ -211,3 +211,10 @@ sistema adicinando os seguintes comandos nos seguintes arquivos
 		apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 Também revisamos metodos visto em vezes anteriores
+
+--> Tela de autenticação
+Conhecemos a dependência abaixo que identifica algumas configurações dos Iphone
+	yarn add react-native-iphone-x-helper
+
+Realizar uma manipulação de como o teclado deve ficar ao aparecer
+KeyboardAvoidingView
