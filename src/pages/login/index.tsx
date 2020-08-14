@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import IconeFeather from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 
 import InputComponente from '../../components/input';
 import BotaoComponente from '../../components/botao';
@@ -16,6 +17,8 @@ import {
 import logoImagem from '../../assets/logo.png';
 
 const Login: React.FC = () => {
+	const navegacao = useNavigation();
+
 	return (
 		<>
 			<KeyboardAvoidingView
@@ -60,7 +63,8 @@ const Login: React.FC = () => {
 
 			<CriarConta
 				onPress={() => {
-					console.log('COMO UM ANJO...');
+					// FAZ VOLTAR PARA A UTILIMA TELA ACESSADA
+					navegacao.goBack();
 				}}
 			>
 				<IconeFeather name="log-in" size={20} color="#ff9000" />

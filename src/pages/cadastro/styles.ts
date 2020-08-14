@@ -17,18 +17,8 @@ export const Titulo = Styled.Text`
   margin: 44px 0 14px;
 `;
 
-export const AjudaSenha = Styled.TouchableOpacity`
-	margin-top: 24px;
-`;
-
-export const AjudaSenhaTexto = Styled.Text`
-	color: #f4ede8;
-	font-size: 16px;
-	font-family: 'RobotoSlab-Medium';
-`;
-
 // TouchableWithoutFeedback FAZ NAO ACONTECER UM EFEITO AO CLICAR
-export const CriarConta = Styled.TouchableOpacity`
+export const Voltar = Styled.TouchableOpacity`
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -44,8 +34,8 @@ export const CriarConta = Styled.TouchableOpacity`
 	flex-direction: row;
 `;
 
-export const CriarContaTexto = Styled.Text`
-	color: #ff9000;
+export const VoltarTexto = Styled.Text`
+	color: #ffffff;
 	font-size: 18px;
 	font-family: 'RobotoSlab-Medium';
 	margin-left: 16px;

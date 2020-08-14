@@ -15,7 +15,9 @@ const autenticacaoRota: React.FC = () => (
 			headerShown: false,
 			// MUDA A COR DE FUNDO
 			cardStyle: { backgroundColor: '#312e38' },
+			// DEFINE EM QUAL PAGINA INICIAR
 		}}
+		initialRouteName="CadastroPagina"
 	>
 		<Autenticacao.Screen name="LoginPagina" component={LoginPagina} />
 		<Autenticacao.Screen name="CadastroPagina" component={CadastroPagina} />

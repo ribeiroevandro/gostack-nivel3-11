@@ -218,3 +218,13 @@ Conhecemos a dependência abaixo que identifica algumas configurações dos Ipho
 
 Realizar uma manipulação de como o teclado deve ficar ao aparecer
 KeyboardAvoidingView
+
+--> Tela de cadastro
+Define qual página deve abrir ao iniciar o aplicativo
+	initialRouteName="CadastroPagina"
+
+Devemos acostumar com a criação de estilização com regra de if para ser aplicado certa
+estilização a partir do tipo de sistema que o celular utiliza como Android e IOS
+
+Para a criação das rotas vamos utilizar a dependência abaixo
+	import { useNavigation } from '@react-navigation/native';
