@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react'; // SING IN
 import { Image, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import IconeFeather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
 
 import InputComponente from '../../components/input';
 import BotaoComponente from '../../components/botao';
@@ -10,6 +12,8 @@ import { Container, Titulo, Voltar, VoltarTexto } from './styles';
 import logoImagem from '../../assets/logo.png';
 
 const Cadastro: React.FC = () => {
+	const formRef = useRef<FormHandles>(null);
+
 	const navegacao = useNavigation();
 
 	return (
@@ -32,17 +36,20 @@ const Cadastro: React.FC = () => {
 							<Titulo>Crie sua conta</Titulo>
 						</View>
 
-						<InputComponente nome="nome" icone="user" placeholder="Nome" />
-						<InputComponente nome="email" icone="mail" placeholder="E-mail" />
-						<InputComponente nome="senha" icone="lock" placeholder="Senha" />
-
-						<BotaoComponente
-							onPress={() => {
-								console.log('TE LIGUEI...');
+						<Form
+							ref={formRef}
+							onSubmit={data => {
+								console.log(data);
 							}}
 						>
-							Entrar
-						</BotaoComponente>
+							<InputComponente nome="nome" icone="user" placeholder="Nome" />
+							<InputComponente nome="email" icone="mail" placeholder="E-mail" />
+							<InputComponente nome="senha" icone="lock" placeholder="Senha" />
+
+							<BotaoComponente onPress={() => formRef.current?.submitForm()}>
+								Entrar
+							</BotaoComponente>
+						</Form>
 					</Container>
 				</ScrollView>
 			</KeyboardAvoidingView>

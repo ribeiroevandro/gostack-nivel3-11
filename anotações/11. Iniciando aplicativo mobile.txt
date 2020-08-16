@@ -228,3 +228,10 @@ estilização a partir do tipo de sistema que o celular utiliza como Android e I
 
 Para a criação das rotas vamos utilizar a dependência abaixo
 	import { useNavigation } from '@react-navigation/native';
+
+--> Integrando Unform
+Para lidar com os formularios usaremos as seguintes dependências
+	yarn add @unform/core @unform/mobile
+
+Utilizamos o useRef quando queremos manipular um elemento de forma direta, onde nos
+iremos configurar oque deve acontecer quando um botao ou outra coisa for acionado

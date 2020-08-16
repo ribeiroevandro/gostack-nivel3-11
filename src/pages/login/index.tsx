@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react'; // SING IN
 import { Image, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import IconeFeather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
 
 import InputComponente from '../../components/input';
 import BotaoComponente from '../../components/botao';
@@ -17,7 +19,16 @@ import {
 import logoImagem from '../../assets/logo.png';
 
 const Login: React.FC = () => {
+	// PARA MANIPULACAO UM ELEMENTO DE FORMA DIRETA
+	const formRef = useRef<FormHandles>(null);
+
+	// CONTROLAR TROCA DE PAGINAS
 	const navegacao = useNavigation();
+
+	// MANIPULAR O LOGIN DO USUARIO
+	const usuarioLogin = useCallback((data: object) => {
+		console.log(data);
+	}, []);
 
 	return (
 		<>
@@ -39,16 +50,18 @@ const Login: React.FC = () => {
 							<Titulo>Faça seu login</Titulo>
 						</View>
 
-						<InputComponente nome="email" icone="mail" placeholder="E-mail" />
-						<InputComponente nome="senha" icone="lock" placeholder="Senha" />
+						<Form ref={formRef} onSubmit={usuarioLogin}>
+							<InputComponente nome="email" icone="mail" placeholder="E-mail" />
+							<InputComponente nome="senha" icone="lock" placeholder="Senha" />
 
-						<BotaoComponente
-							onPress={() => {
-								console.log('TE LIGUEI...');
-							}}
-						>
-							Entrar
-						</BotaoComponente>
+							<BotaoComponente
+								onPress={() => {
+									formRef.current?.submitForm();
+								}}
+							>
+								Entrar
+							</BotaoComponente>
+						</Form>
 
 						<AjudaSenha
 							onPress={() => {
