@@ -235,3 +235,15 @@ Para lidar com os formularios usaremos as seguintes dependências
 
 Utilizamos o useRef quando queremos manipular um elemento de forma direta, onde nos
 iremos configurar oque deve acontecer quando um botao ou outra coisa for acionado
+
+--> Usabilidade em formulários
+Nesta aula aprendemos a manipular os input definindo quais são de senha, e-mail, as
+primeira letras maiuscula deve ser cherada e a configuração do botão especial que
+existe nos teclado no canto inferior direito
+
+A propriedade ref não conseguimos acessar, com isso devemos mudar o tipo da função
+criar um interface dos comandos que desejamos usar e criar um hook ou informar o ref
+	React.FunctionComponent => RefForwardingComponent
+
+Referencias são formas de nos manipular/acessar propriedades e funções dentro do React
+de um elemento numa forma direta, sem a nescessidade de um evento

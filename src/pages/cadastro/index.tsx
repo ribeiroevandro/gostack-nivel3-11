@@ -1,5 +1,12 @@
-import React, { useRef } from 'react'; // SING IN
-import { Image, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useRef } from 'react'; // SING UP
+import {
+	Image,
+	View,
+	ScrollView,
+	KeyboardAvoidingView,
+	Platform,
+	TextInput,
+} from 'react-native';
 import IconeFeather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
@@ -15,6 +22,9 @@ const Cadastro: React.FC = () => {
 	const formRef = useRef<FormHandles>(null);
 
 	const navegacao = useNavigation();
+
+	const emailInputRef = useRef<TextInput>(null);
+	const senhaInputRef = useRef<TextInput>(null);
 
 	return (
 		<>
@@ -42,9 +52,42 @@ const Cadastro: React.FC = () => {
 								console.log(data);
 							}}
 						>
-							<InputComponente nome="nome" icone="user" placeholder="Nome" />
-							<InputComponente nome="email" icone="mail" placeholder="E-mail" />
-							<InputComponente nome="senha" icone="lock" placeholder="Senha" />
+							<InputComponente
+								nome="nome"
+								icone="user"
+								placeholder="Nome"
+								autoCorrect={false}
+								// PRIMEIRA LETRA DE CADA PALAVRA EM CAIXA ALTA
+								autoCapitalize="words"
+								returnKeyType="next"
+								onSubmitEditing={() => {
+									emailInputRef.current?.focus();
+								}}
+							/>
+							<InputComponente
+								ref={emailInputRef}
+								nome="email"
+								icone="mail"
+								placeholder="E-mail"
+								autoCorrect={false}
+								autoCapitalize="none"
+								keyboardType="email-address"
+								returnKeyType="next"
+								onSubmitEditing={() => {
+									senhaInputRef.current?.focus();
+								}}
+							/>
+							<InputComponente
+								ref={senhaInputRef}
+								nome="senha"
+								icone="lock"
+								placeholder="Senha"
+								secureTextEntry
+								// BLOQUEA A CHEGARACAO AUTOMATICA DE SENHA DO SISTEMA
+								textContentType="newPassword"
+								returnKeyType="send"
+								onSubmitEditing={() => formRef.current?.submitForm()}
+							/>
 
 							<BotaoComponente onPress={() => formRef.current?.submitForm()}>
 								Entrar

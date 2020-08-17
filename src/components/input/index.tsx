@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
 
@@ -13,12 +13,28 @@ interface InputvalorReferencia {
 	valor: string;
 }
 
-const Input: React.FC<InputPropriedade> = ({ nome, icone, ...rest }) => {
+interface InputRef {
+	focus(): void;
+}
+
+// ALTERAMOS O TIPO PARA PODER RECEBER A PROPRIEDADE ref
+const Input: React.RefForwardingComponent<InputRef, InputPropriedade> = (
+	{ nome, icone, ...rest },
+	ref,
+) => {
 	const inputElementoRef = useRef<any>(null);
 
 	const { registerField, defaultValue = '', fieldName, error } = useField(nome);
 
 	const inputValorRef = useRef<InputvalorReferencia>({ valor: defaultValue });
+
+	// VAI PASSAR AS INFORMACOES DO FILHO PARA O PAI
+	// FALAR QUE focus PERTENCE A ref
+	useImperativeHandle(ref, () => ({
+		focus() {
+			inputElementoRef.current.focus();
+		},
+	}));
 
 	useEffect(() => {
 		registerField<string>({
@@ -61,4 +77,4 @@ const Input: React.FC<InputPropriedade> = ({ nome, icone, ...rest }) => {
 	);
 };
 
-export default Input;
+export default forwardRef(Input);

@@ -1,5 +1,12 @@
 import React, { useCallback, useRef } from 'react'; // SING IN
-import { Image, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+	Image,
+	View,
+	ScrollView,
+	KeyboardAvoidingView,
+	Platform,
+	TextInput,
+} from 'react-native';
 import IconeFeather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
@@ -21,6 +28,8 @@ import logoImagem from '../../assets/logo.png';
 const Login: React.FC = () => {
 	// PARA MANIPULACAO UM ELEMENTO DE FORMA DIRETA
 	const formRef = useRef<FormHandles>(null);
+
+	const senhaInputRef = useRef<TextInput>(null);
 
 	// CONTROLAR TROCA DE PAGINAS
 	const navegacao = useNavigation();
@@ -51,8 +60,40 @@ const Login: React.FC = () => {
 						</View>
 
 						<Form ref={formRef} onSubmit={usuarioLogin}>
-							<InputComponente nome="email" icone="mail" placeholder="E-mail" />
-							<InputComponente nome="senha" icone="lock" placeholder="Senha" />
+							<InputComponente
+								nome="email"
+								icone="mail"
+								placeholder="E-mail"
+								// DESATIVA A CORRECAO DO TEXTO
+								autoCorrect={false}
+								// DESATIVA A LETRA MAIUSCULA
+								autoCapitalize="none"
+								// ATIVA O TECLADO NO MODO PARA EMAIL
+								keyboardType="email-address"
+								// DEFINE O ICONE AVANCAR NO BOTAO ESPECIAL
+								returnKeyType="next"
+								// DEFINE OQUE O BOTAO ESPECIAL DEVE EXECUTAR
+								onSubmitEditing={() => {
+									// AVANCA PARA O PROXIMO CAMPO COMO INPUT OU BOTAO
+									senhaInputRef.current?.focus();
+								}}
+							/>
+
+							<InputComponente
+								ref={senhaInputRef}
+								nome="senha"
+								icone="lock"
+								placeholder="Senha"
+								// DEFINE O CAMPO PARA RECEBER SENHA
+								secureTextEntry
+								// DEFINE O ICONE ENVIAR NO BOTAO ESPECIAL
+								returnKeyType="send"
+								// DEFINE OQUE O BOTAO ESPECIAL DEVE EXECUTAR
+								onSubmitEditing={() => {
+									// ENVIA AS INFORMACOES
+									formRef.current?.submitForm();
+								}}
+							/>
 
 							<BotaoComponente
 								onPress={() => {
