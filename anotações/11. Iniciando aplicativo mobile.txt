@@ -247,3 +247,7 @@ criar um interface dos comandos que desejamos usar e criar um hook ou informar o
 
 Referencias são formas de nos manipular/acessar propriedades e funções dentro do React
 de um elemento numa forma direta, sem a nescessidade de um evento
+
+--> Foco e preenchimento
+Agora utilizamos os mesmos metodo aplicado na versão web onde quando o input é
+selecionado a borda muda de cor e se ficar preenchido o icone muda de cor

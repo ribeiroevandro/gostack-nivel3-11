@@ -1,4 +1,11 @@
-import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import React, {
+	useCallback,
+	useState,
+	useEffect,
+	useRef,
+	useImperativeHandle,
+	forwardRef,
+} from 'react';
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
 
@@ -28,6 +35,17 @@ const Input: React.RefForwardingComponent<InputRef, InputPropriedade> = (
 
 	const inputValorRef = useRef<InputvalorReferencia>({ valor: defaultValue });
 
+	const [selecionado, setSelecionado] = useState(false);
+	const usuarioInputSelecionado = useCallback(() => {
+		setSelecionado(true);
+	}, []);
+
+	const [preenchido, setPreenchido] = useState(false);
+	const usuarioInputPreenchido = useCallback(() => {
+		setSelecionado(false);
+		setPreenchido(!!inputValorRef.current.valor);
+	}, []);
+
 	// VAI PASSAR AS INFORMACOES DO FILHO PARA O PAI
 	// FALAR QUE focus PERTENCE A ref
 	useImperativeHandle(ref, () => ({
@@ -55,8 +73,12 @@ const Input: React.RefForwardingComponent<InputRef, InputPropriedade> = (
 	}, [fieldName, registerField]);
 
 	return (
-		<Container>
-			<Icone name={icone} size={20} color="#666360" />
+		<Container selecionado={selecionado}>
+			<Icone
+				name={icone}
+				size={20}
+				color={selecionado || preenchido ? '#ff9000' : '#666360'}
+			/>
 
 			<TextoInput
 				ref={inputElementoRef}
@@ -67,6 +89,8 @@ const Input: React.RefForwardingComponent<InputRef, InputPropriedade> = (
 				// VALOR QUE DEVE TER DENTRO AO INICIAR
 				defaultValue={defaultValue}
 				// FUNCAO QUE EXECUTA QUANDO O TEXTO DIGITADO MUDA
+				onFocus={usuarioInputSelecionado}
+				onBlur={usuarioInputPreenchido}
 				onChangeText={valor => {
 					// RECUPERA O VALOR SALVO
 					inputValorRef.current.valor = valor;

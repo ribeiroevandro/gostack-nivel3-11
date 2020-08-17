@@ -1,17 +1,29 @@
-import Styled from 'styled-components/native';
+import Styled, { css } from 'styled-components/native';
 import IconeFeather from 'react-native-vector-icons/Feather';
 
-export const Container = Styled.View`
+interface ContainerPropriedade {
+	selecionado: boolean;
+}
+
+export const Container = Styled.View<ContainerPropriedade>`
 	width: 100%;
 	height: 60px;
 	padding: 0 16px;
 	background: #232129;
 	border-radius: 10px;
 	margin-bottom: 8px;
+	border-width: 2px;
+	border-color: #232129;
 
 	/* DEFINE A FORMA DE ALINHAMENTO */
 	flex-direction: row;
 	align-items: center;
+
+	${props =>
+		props.selecionado &&
+		css`
+			border-color: #ff9000;
+		`}
 `;
 
 export const TextoInput = Styled.TextInput`
