@@ -259,3 +259,11 @@ Para realizar as validações dos formulários iremos usar a seguinte dependênc
 
 Nesta aula reutilizamos a logica para validar as informações para realizar o
 login da página ou cadastro de usuário
+
+----> 3. Conectando com a API
+--> Cadastro na aplicação
+Para criar o vinculo com o backend iremos usar esta dependência
+	yarn add axios
+
+Para conectar com a api devemos criar um arquivo definindo a caminho do backend,
+onde para conectar um celular Android com ele devemos utilziar o IP do celular

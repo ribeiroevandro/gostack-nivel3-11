@@ -14,6 +14,7 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
+import Api from '../../services/api';
 import ValidacaoErroUtilizario from '../../utils/validacaoerro';
 import InputComponente from '../../components/input';
 import BotaoComponente from '../../components/botao';
@@ -53,16 +54,14 @@ const Cadastro: React.FC = () => {
 				// FAZ TRAZER TODOS OS ERROS
 				abortEarly: false,
 			});
-			/**
-				await Api.post('/usuarios', data);
 
-				historico.push('/');
+			await Api.post('/usuarios', data);
 
-				adicionarToast({
-					tipo: 'sucesso',
-					titulo: 'Cadastro realizado!',
-					descricao: 'Você já pode fazer seu logon no GoBarber!',
-				}); */
+			// ENVIA UMA MENSAGEM COM ESTE TITULO E DESCRICAO
+			Alert.alert('Cadastro realizado!', 'Você já pode fazer seu logon no GoBarber!');
+
+			// FAZ ACESSAR A PAGINA DE LOGIN
+			navegacao.navigate('LoginPagina');
 		} catch (err) {
 			// CHAMA A IMPORTCAO PARA DAR UMA TRATIVA NOS ERROS
 			// const resultado = ValidacaoErroUtilizario(err);
