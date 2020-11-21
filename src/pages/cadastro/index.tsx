@@ -36,52 +36,55 @@ const Cadastro: React.FC = () => {
 	const emailInputRef = useRef<TextInput>(null);
 	const senhaInputRef = useRef<TextInput>(null);
 
-	const usuarioCadastro = useCallback(async (data: cadastroUsuario) => {
-		try {
-			// ESVAZIA A LISTA DE ERROS
-			formRef.current?.setErrors({});
+	const usuarioCadastro = useCallback(
+		async (data: cadastroUsuario) => {
+			try {
+				// ESVAZIA A LISTA DE ERROS
+				formRef.current?.setErrors({});
 
-			// INFORMAMOS COMO IREMOS RECEBER OS DADOS
-			const schema = Yup.object().shape({
-				// REGRAS DE VALIDACAO
-				nome: Yup.string().required('Nome obrigatório!'),
-				email: Yup.string().required('E-mail obrigatório!').email('E-mail inválido!'),
-				senha: Yup.string().required('Senha obrigatória!').min(6, 'No mínimo 6 dígitos'),
-			});
+				// INFORMAMOS COMO IREMOS RECEBER OS DADOS
+				const schema = Yup.object().shape({
+					// REGRAS DE VALIDACAO
+					nome: Yup.string().required('Nome obrigatório!'),
+					email: Yup.string().required('E-mail obrigatório!').email('E-mail inválido!'),
+					senha: Yup.string().required('Senha obrigatória!').min(6, 'No mínimo 6 dígitos'),
+				});
 
-			// OQUE DEVE ACONTECER SE PASSAR PELAS REGRAS DE NEGOCIO
-			await schema.validate(data, {
-				// FAZ TRAZER TODOS OS ERROS
-				abortEarly: false,
-			});
+				// OQUE DEVE ACONTECER SE PASSAR PELAS REGRAS DE NEGOCIO
+				await schema.validate(data, {
+					// FAZ TRAZER TODOS OS ERROS
+					abortEarly: false,
+				});
 
-			await Api.post('/usuarios', data);
+				await Api.post('/usuarios', data);
 
-			// ENVIA UMA MENSAGEM COM ESTE TITULO E DESCRICAO
-			Alert.alert('Cadastro realizado!', 'Você já pode fazer seu logon no GoBarber!');
+				// ENVIA UMA MENSAGEM COM ESTE TITULO E DESCRICAO
+				Alert.alert('Cadastro realizado!', 'Você já pode fazer seu logon no GoBarber!');
 
-			// FAZ ACESSAR A PAGINA DE LOGIN
-			navegacao.navigate('LoginPagina');
-		} catch (err) {
-			// CHAMA A IMPORTCAO PARA DAR UMA TRATIVA NOS ERROS
-			// const resultado = ValidacaoErroUtilizario(err);
+				// FAZ ACESSAR A PAGINA DE LOGIN
+				navegacao.navigate('LoginPagina');
+			} catch (err) {
+				// CHAMA A IMPORTCAO PARA DAR UMA TRATIVA NOS ERROS
+				// const resultado = ValidacaoErroUtilizario(err);
 
-			// ENVIA AS TRATATIVAS EXISTENTES
-			// formRef.current?.setErrors(resultado);
-			if (err instanceof Yup.ValidationError) {
-				const resultado = ValidacaoErroUtilizario(err);
+				// ENVIA AS TRATATIVAS EXISTENTES
+				// formRef.current?.setErrors(resultado);
+				if (err instanceof Yup.ValidationError) {
+					const resultado = ValidacaoErroUtilizario(err);
 
-				formRef.current?.setErrors(resultado);
+					formRef.current?.setErrors(resultado);
 
-				return;
+					return;
+				}
+
+				Alert.alert(
+					'Erro no cadastro',
+					'Ocorreu um erro ao fazer cadastro, tente novamente',
+				);
 			}
-
-			Alert.alert(
-				'Erro no cadastro',
-				'Ocorreu um erro ao fazer cadastro, tente novamente',
-			);
-		}
-	}, []);
+		},
+		[navegacao],
+	);
 
 	return (
 		<>

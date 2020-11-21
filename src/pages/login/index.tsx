@@ -14,6 +14,7 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
+import { useAutenticacao } from '../../hooks/autenticar';
 import ValidacaoErroUtilizario from '../../utils/validacaoerro';
 import InputComponente from '../../components/input';
 import BotaoComponente from '../../components/botao';
@@ -42,6 +43,9 @@ const Login: React.FC = () => {
 	// CONTROLAR TROCA DE PAGINAS
 	const navegacao = useNavigation();
 
+	// IMPORTA OS METODOS DENTRO DO HOOK DE EUTENTICACAO
+	const { login } = useAutenticacao();
+
 	// MANIPULAR O LOGIN DO USUARIO
 	const usuarioLogin = useCallback(async (data: DadosLogin) => {
 		try {
@@ -55,14 +59,11 @@ const Login: React.FC = () => {
 			await schema.validate(data, {
 				abortEarly: false,
 			});
-			/**
-				await login({
-					email: data.email,
-					senha: data.senha,
-				});
 
-				historico.push('/inicial');
-				*/
+			await login({
+				email: data.email,
+				senha: data.senha,
+			});
 		} catch (err) {
 			// VERIFICA SE O ERRO VEM DO Yup
 			if (err instanceof Yup.ValidationError) {

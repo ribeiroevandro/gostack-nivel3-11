@@ -267,3 +267,8 @@ Para criar o vinculo com o backend iremos usar esta dependência
 
 Para conectar com a api devemos criar um arquivo definindo a caminho do backend,
 onde para conectar um celular Android com ele devemos utilziar o IP do celular
+
+--> Autenticação de usuários
+Esta autenticação será bem pareceda com a que foi criada para a versão web
+Uma coisa que muda é que vamos utilizar Storage Async
+	yarn add @react-native-community/async-storage
