@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'; // SING UP
+import React, { useRef, useCallback } from 'react'; // SING UP
 import {
 	Image,
 	View,
@@ -6,17 +6,26 @@ import {
 	KeyboardAvoidingView,
 	Platform,
 	TextInput,
+	Alert,
 } from 'react-native';
 import IconeFeather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 
+import ValidacaoErroUtilizario from '../../utils/validacaoerro';
 import InputComponente from '../../components/input';
 import BotaoComponente from '../../components/botao';
 import { Container, Titulo, Voltar, VoltarTexto } from './styles';
 
 import logoImagem from '../../assets/logo.png';
+
+interface cadastroUsuario {
+	nome: string;
+	email: string;
+	senha: string;
+}
 
 const Cadastro: React.FC = () => {
 	const formRef = useRef<FormHandles>(null);
@@ -25,6 +34,55 @@ const Cadastro: React.FC = () => {
 
 	const emailInputRef = useRef<TextInput>(null);
 	const senhaInputRef = useRef<TextInput>(null);
+
+	const usuarioCadastro = useCallback(async (data: cadastroUsuario) => {
+		try {
+			// ESVAZIA A LISTA DE ERROS
+			formRef.current?.setErrors({});
+
+			// INFORMAMOS COMO IREMOS RECEBER OS DADOS
+			const schema = Yup.object().shape({
+				// REGRAS DE VALIDACAO
+				nome: Yup.string().required('Nome obrigatório!'),
+				email: Yup.string().required('E-mail obrigatório!').email('E-mail inválido!'),
+				senha: Yup.string().required('Senha obrigatória!').min(6, 'No mínimo 6 dígitos'),
+			});
+
+			// OQUE DEVE ACONTECER SE PASSAR PELAS REGRAS DE NEGOCIO
+			await schema.validate(data, {
+				// FAZ TRAZER TODOS OS ERROS
+				abortEarly: false,
+			});
+			/**
+				await Api.post('/usuarios', data);
+
+				historico.push('/');
+
+				adicionarToast({
+					tipo: 'sucesso',
+					titulo: 'Cadastro realizado!',
+					descricao: 'Você já pode fazer seu logon no GoBarber!',
+				}); */
+		} catch (err) {
+			// CHAMA A IMPORTCAO PARA DAR UMA TRATIVA NOS ERROS
+			// const resultado = ValidacaoErroUtilizario(err);
+
+			// ENVIA AS TRATATIVAS EXISTENTES
+			// formRef.current?.setErrors(resultado);
+			if (err instanceof Yup.ValidationError) {
+				const resultado = ValidacaoErroUtilizario(err);
+
+				formRef.current?.setErrors(resultado);
+
+				return;
+			}
+
+			Alert.alert(
+				'Erro no cadastro',
+				'Ocorreu um erro ao fazer cadastro, tente novamente',
+			);
+		}
+	}, []);
 
 	return (
 		<>
@@ -46,12 +104,7 @@ const Cadastro: React.FC = () => {
 							<Titulo>Crie sua conta</Titulo>
 						</View>
 
-						<Form
-							ref={formRef}
-							onSubmit={data => {
-								console.log(data);
-							}}
-						>
+						<Form ref={formRef} onSubmit={usuarioCadastro}>
 							<InputComponente
 								nome="nome"
 								icone="user"

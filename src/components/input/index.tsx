@@ -73,7 +73,7 @@ const Input: React.RefForwardingComponent<InputRef, InputPropriedade> = (
 	}, [fieldName, registerField]);
 
 	return (
-		<Container selecionado={selecionado}>
+		<Container selecionado={selecionado} temErro={!!error}>
 			<Icone
 				name={icone}
 				size={20}

@@ -230,7 +230,7 @@ Para a criação das rotas vamos utilizar a dependência abaixo
 	import { useNavigation } from '@react-navigation/native';
 
 --> Integrando Unform
-Para lidar com os formularios usaremos as seguintes dependências
+Para lidar com os formulários usaremos as seguintes dependências
 	yarn add @unform/core @unform/mobile
 
 Utilizamos o useRef quando queremos manipular um elemento de forma direta, onde nos
@@ -251,3 +251,11 @@ de um elemento numa forma direta, sem a nescessidade de um evento
 --> Foco e preenchimento
 Agora utilizamos os mesmos metodo aplicado na versão web onde quando o input é
 selecionado a borda muda de cor e se ficar preenchido o icone muda de cor
+
+--> Validação dos formulários
+Para realizar as validações dos formulários iremos usar a seguinte dependência
+	yarn add yup
+	yarn add @types/yup -D
+
+Nesta aula reutilizamos a logica para validar as informações para realizar o
+login da página ou cadastro de usuário

@@ -3,6 +3,7 @@ import IconeFeather from 'react-native-vector-icons/Feather';
 
 interface ContainerPropriedade {
 	selecionado: boolean;
+	temErro: boolean;
 }
 
 export const Container = Styled.View<ContainerPropriedade>`
@@ -18,6 +19,12 @@ export const Container = Styled.View<ContainerPropriedade>`
 	/* DEFINE A FORMA DE ALINHAMENTO */
 	flex-direction: row;
 	align-items: center;
+
+	${props =>
+		props.temErro &&
+		css`
+			border-color: #c53030;
+		`}
 
 	${props =>
 		props.selecionado &&
