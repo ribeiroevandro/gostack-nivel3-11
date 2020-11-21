@@ -160,7 +160,7 @@ const Login: React.FC = () => {
 			<CriarConta
 				onPress={() => {
 					// FAZ VOLTAR PARA A UTILIMA TELA ACESSADA
-					navegacao.goBack();
+					navegacao.navigate('CadastroPagina');
 				}}
 			>
 				<IconeFeather name="log-in" size={20} color="#ff9000" />

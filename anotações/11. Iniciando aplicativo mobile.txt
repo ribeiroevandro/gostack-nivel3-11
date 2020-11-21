@@ -272,3 +272,12 @@ onde para conectar um celular Android com ele devemos utilziar o IP do celular
 Esta autenticação será bem pareceda com a que foi criada para a versão web
 Uma coisa que muda é que vamos utilizar Storage Async
 	yarn add @react-native-community/async-storage
+
+--> Rotas privadas
+Nesta aula aplicamos a metodologia de agrupar as páginas que pode ser acessadas
+somente quando o usuário estiver logado ou não, no modo web simplismente redirecionamos
+quando ele acessa algo que não pode, este metodo novo é mais eficaz
+
+Também aprendemos a como colocar o aplicativo em espera quanto a API verifica se o
+usuário está logado, para isso usamos a dependência abaixo:
+	import { ActivityIndicator } from 'react-native';

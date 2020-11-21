@@ -29,6 +29,7 @@
 		"prettier"
 	],
 	"rules": {
+		//"sort-imports": "error",
 		"@typescript-eslint/no-explicit-any": "off",
 		"no-unused-expressions": "off",
 		"@typescript-eslint/ban-types": "off",

@@ -9,6 +9,7 @@ export const Container = Styled(RectButton)`
 	border-radius: 10px;
 	margin-top: 8px;
 
+
 	/* O REACT NATIVE JA VEM COM ESTE COMANDO ATIVO */
 	/* display: flex; */
 	justify-content: center;

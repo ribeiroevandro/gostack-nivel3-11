@@ -1,27 +1,26 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { View, ActivityIndicator } from 'react-native';
 
-import LoginPagina from '../pages/login';
-import CadastroPagina from '../pages/cadastro';
+import { useAutenticacao } from '../hooks/autenticar';
 
-// NAVEGACAO DE AUTENTICACAO DO USUARIO
-const Autenticacao = createStackNavigator();
+import AutenticarRota from './autenticar'; // auth.routes.tsx
+import AutenticadoRota from './autenticado'; // app.routes.tsx
 
-const autenticacaoRota: React.FC = () => (
-	<Autenticacao.Navigator
-		// EDITAR A ESTILISACAO PADRAO DO NavigationContainer
-		screenOptions={{
-			// DESATIVA O CABECALHO
-			headerShown: false,
-			// MUDA A COR DE FUNDO
-			cardStyle: { backgroundColor: '#312e38' },
-			// DEFINE EM QUAL PAGINA INICIAR
-		}}
-		initialRouteName="CadastroPagina"
-	>
-		<Autenticacao.Screen name="LoginPagina" component={LoginPagina} />
-		<Autenticacao.Screen name="CadastroPagina" component={CadastroPagina} />
-	</Autenticacao.Navigator>
-);
+const Rota: React.FC = () => {
+	const { usuario, carregando } = useAutenticacao();
 
-export default autenticacaoRota;
+	// FAZ APARECER UM TEMPORISADOR ENQUANTO A API AUTENTICA O USUARIO
+	if (carregando) {
+		return (
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+				<ActivityIndicator size="large" color="#99999" />
+			</View>
+		);
+	}
+
+	// DEFINE QUAL GRUPO O USUARIO VAI ACESSAR
+	// AS PAGINAS QUE PRECISA DE AUTENTICACAO OU NAO
+	return usuario ? <AutenticadoRota /> : <AutenticarRota />;
+};
+
+export default Rota;
