@@ -1,9 +1,10 @@
-import Styled, { css } from 'styled-components/native';
 import IconeFeather from 'react-native-vector-icons/Feather';
 
+import Styled, { css } from 'styled-components/native';
+
 interface ContainerPropriedade {
-	selecionado: boolean;
-	temErro: boolean;
+  selecionado: boolean;
+  temErro: boolean;
 }
 
 export const Container = Styled.View<ContainerPropriedade>`
@@ -20,17 +21,17 @@ export const Container = Styled.View<ContainerPropriedade>`
 	flex-direction: row;
 	align-items: center;
 
-	${props =>
-		props.temErro &&
-		css`
-			border-color: #c53030;
-		`}
+	${(props) =>
+    props.temErro &&
+    css`
+      border-color: #c53030;
+    `}
 
-	${props =>
-		props.selecionado &&
-		css`
-			border-color: #ff9000;
-		`}
+	${(props) =>
+    props.selecionado &&
+    css`
+      border-color: #ff9000;
+    `}
 `;
 
 export const TextoInput = Styled.TextInput`
